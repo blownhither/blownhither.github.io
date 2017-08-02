@@ -6,15 +6,15 @@
 xmlns="http://www.w3.org/2000/svg">
 <!--<author name="Blownhither@github" />-->
 <g>
-    <text y="20" style="font-family:Impact, Charcoal, sans-serif; font-size:17">
+    <text y="15" style="font-family:Impact, Charcoal, sans-serif; font-size:17">
         <tspan x="30" text-anchor="middle">Pattern</tspan>
         <tspan x="55" text-anchor="middle" dy="18"> Recognition</tspan>
         <tspan x="50" text-anchor="middle" dy="18">&amp;</tspan>
         <tspan x="35" text-anchor="middle" dy="18">Machine</tspan>
         <tspan x="60" text-anchor="middle" dy="18"> Learning</tspan>
     </text>
-    <path d="M55 10 H95 V25" stroke="black" fill="none" />
-    <path d="M5 75 V92 H25" stroke="black" fill="none" />
+    <path d="M55 4 H95 V20" stroke="black" fill="none" />
+    <path d="M5 70 V87 H25" stroke="black" fill="none" />
 </g> 
 
 </svg>
