@@ -29,42 +29,59 @@ function drawDashCircle(context, x, y, radius, startAngle=0, nDash=5) {
     }
 }
 
-function fireSpinningCircle(context, canvas) {
-    const STEP = 2 * Math.PI / 300;
-    const SQUAD = [canvas.width / 6, canvas.height / 6];
-    let start = 0;
-
-    window.setInterval(function() {
-        context.clearRect(SQUAD[0], SQUAD[1], SQUAD[0] * 4, SQUAD[1] * 4);
-        drawDashCircle(context, _x, _y, RADIUS, start);
-        start += STEP;
-        if(start > 2 * Math.pi) {
-            start -= 2 * Math.pil
-        }
-        // console.log(start);
-    }, 10);
-}
-
-function newton() {
+function newton(canvas) {
+    const w = canvas.width;
+    const h = canvas.height;
     if(!_dragging) {
-        _ax = -1e-2 * _vx;
-        _ay = -1e-2 * _vy;
+        if(_x < 0 || _x > w || _y < 0 || _y > h){       // Put back
+            _x = 2000;
+            _y = 800;
+            _ax = 0;
+            _ay = 0;
+            _vx = 0;
+            _vy = 0;
+            document.getElementById('textBox').innerHTML = 'Oops! I put it back.';
+        } else {                                        // ease down
+            if(Math.abs(_vx) > 0)
+            _vx = 0.95 * _vx;
+            _vy = 0.95 * _vy;
+        }
+    } else {
+        document.getElementById('textBox').innerHTML = 'Drag me!';
     }
     _x += _vx;
     _y += _vy;
     _vx += _ax;
     _vy += _ay;
-    printMove();
 }
+
+
+// function drawBoundingRect(context, canvas) {
+//     let h = canvas.height;
+//     let w = canvas.width;
+//     let left = h / 6 * 0.95;
+//     let top = w / 6 * 0.95;
+//     let len = top / 3;
+//     let points = [[left, top], [left, h - top * 2], [w - left, top], [w - left, h - top * 2]];
+//     context.strokeStyle = 'red';
+//     context.strokeWidth = 70;
+//
+//     for(let i=0; i<4; i++) {
+//         let p = points[i];
+//         context.beginPath();
+//         context.moveTo(p[0], p[1]);
+//         context.lineTo(p[0], p[0] + len);
+//         context.stroke();
+//         console.log(p);
+//     }
+// }
 
 
 window.onload = function() {
     let canvas = document.getElementById("container");
     let context = canvas.getContext("2d");
     canvas.width = 4000;
-    canvas.height = canvas.width * window.innerHeight / window.innerWidth;
-    _x = canvas.width / 2;
-    _y = canvas.height / 2;
+    canvas.height = canvas.width * window.innerHeight / window.innerWidth * 0.8;
 
     canvas.onmousedown = function (e) {
         // Set global parameter if mouse down in the circle
@@ -83,7 +100,6 @@ window.onload = function() {
         _dragging = false;
         _ax = 0;
         _ay = 0;
-        console.log(_ax.toString() + "," + _ay.toString());
     };
     canvas.onmousemove = function (e) {
         // Set acceleration of the circle (linear to dist)
@@ -93,15 +109,28 @@ window.onload = function() {
         let dx = coordinate[0] - _x;
         let dy = coordinate[1] - _y;
         let dist = Math.sqrt(dx * dx + dy * dy);
-        let delta = Math.atan(dist) / 1e4;
+        let delta = Math.atan(dist / canvas.width) / 3e2;
         _ax = dx * delta;
         _ay = dy * delta;
     };
 
+    // drawBoundingRect(context, canvas);
 
-
-    fireSpinningCircle(context, canvas);
-    window.setInterval(newton, 10);
+    const STEP = 2 * Math.PI / 100;
+    const w = canvas.width;
+    const h = canvas.height;
+    // const SQUAD = [canvas.width / 6, canvas.height / 6];
+    let start = 0;
+    window.setInterval(function() {
+        // Draw circle
+        context.clearRect(0, 0, w, h);
+        drawDashCircle(context, _x, _y, RADIUS, start);
+        start += STEP;
+        if(start > 2 * Math.pi) {
+            start -= 2 * Math.pi;
+        }
+        newton(canvas);
+    }, 30);
 
 
     // drawDashCircle(context, 1000, 500, 200);
@@ -125,5 +154,4 @@ function printMove() {
     document.getElementById("xy").innerHTML = "X: " + _x.toString() + " Y: " + _y.toString();
     document.getElementById("vxy").innerHTML = "Vx: " + _vx.toString() + " Vy: " + _vy.toString();
     document.getElementById("axy").innerHTML = "Ax: " + _ax.toString() + " Ay: " + _ay.toString();
-
 }
