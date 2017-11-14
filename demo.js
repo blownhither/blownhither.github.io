@@ -63,6 +63,8 @@ window.onload = function() {
     let context = canvas.getContext("2d");
     canvas.width = 4000;
     canvas.height = canvas.width * window.innerHeight / window.innerWidth;
+    _x = canvas.width / 2;
+    _y = canvas.height / 2;
 
     canvas.onmousedown = function (e) {
         // Set global parameter if mouse down in the circle
