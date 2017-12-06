@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Block</title>
+</head>
+<body>
+
+<div class="row" id="content">
+    <div class="col-md-8 col-lg-8" id="left_pane">
+        <canvas id="container" width="680px" height="680px"></canvas>
+    </div>
+    <div class="col-md-4 col-lg-4">
+        <div class="row text-center" id="title_row" >
+            <h2>Binary Stars</h2>
+            <h4>14307130033 马子殷</h4>
+        </div>
+        <div class="row" id="table_row">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <th>渲染任务</th>
+                    <th>进度</th>
+                    <th>时间开销</th>
+                </thead>
+                <tbody id="table_body">
+                    <tr>
+                        <td>星体渲染</td>
+                        <td id="render_ratio">0.%</td>
+                        <td id="reader_const"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <p>&nbsp;&nbsp;采用蒙特卡洛方法采样光源的衰减,JS实现。</p>
+            <b>&nbsp;&nbsp;您可以点击画布来改变较小星体的位置。</b>
+
+        </div>
+    </div>
+</div>
+<div id="loader_container">
+    <div id="loader">
+
+    </div>
+</div>
+
+</body>
+<!--Bootstrap and jQuery-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="style.css">
+<script src="block.js"></script>
+</html>
