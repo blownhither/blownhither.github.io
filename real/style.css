@@ -1,0 +1,34 @@
+#title_row {
+    color: #7952b3;
+    margin-top: 30%;
+}
+
+#table_row {
+    margin-top: 10%;
+}
+
+#content {
+    max-width: 1024px;
+    min-height: 100%;
+}
+
+#loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+    animation: spin 2s linear infinite;
+}
+
+#loader_container {
+    position: fixed;
+    top: 25%;
+    left: 30%;
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
