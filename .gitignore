@@ -1,6 +1,7 @@
 *
 
 !/img/
+!/real/
 !/img/**
 !.gitignore
 !/**/*.html
