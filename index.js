@@ -175,7 +175,8 @@ function getPrediction(image, callback) {
 
     $.ajax({
         // url: "http://0.0.0.0:8080/predict",
-        url: "http://35.231.80.56:8080/predict",
+        // url: "http://35.231.80.56:8080/predict",
+        url: "/predict"
         method: 'POST',
         async: true,
         data: JSON.stringify(image),
