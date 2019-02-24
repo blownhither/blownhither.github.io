@@ -2,6 +2,10 @@
 
 !/img/
 !/real/
+!/js
+!/fonts
+!/images
+!/css
 !/img/**
 !.gitignore
 !/**/*.html

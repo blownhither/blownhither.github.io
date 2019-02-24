@@ -1,0 +1,27 @@
+.nav-link {
+    font-size: 1.1rem;
+}
+.navbar-brand {
+    font-size: 1.7rem;
+}
+.nav-item {
+    margin-left: 2rem;
+}
+.text-largest {
+    font-size: 3rem;
+}
+.text-larger {
+    font-size: 1.4rem;
+}
+.text-medium {
+    font-size: 1.3rem;
+}
+.text-smaller {
+    font-size: 0.8rem;
+}
+.my-text-gray {
+    color: #999999;
+}
+.title-font {
+    font-family: "PT Serif Caption", apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}

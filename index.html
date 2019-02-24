@@ -1,105 +1,605 @@
 <!DOCTYPE html>
-<html>
-
+<!--  This site was created in Webflow. http://www.webflow.com  -->
+<!--  Last Published: Sat Jan 26 2019 21:20:27 GMT+0000 (UTC)  -->
+<html data-wf-page="5c4cceb7dfbd6c19e12546c1" data-wf-site="5c4cceb6dfbd6c42ed2546bb">
 <head>
-    <script src="https://unpkg.com/konva@2.4.2/konva.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <meta charset="utf-8">
+    <title>What's Missing</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="Webflow" name="generator">
+    <link href="css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="css/webflow.css" rel="stylesheet" type="text/css">
+    <link href="css/temp-09497c.webflow.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <!--<script src="https://unpkg.com/konva@2.4.2/konva.min.js"></script>-->
 
-    <title>CSCI2470 Quick!Draw Pad</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js" type="text/javascript"></script>
+    <script type="text/javascript">WebFont.load({google: {families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]}});</script>
+    <!-- [if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"
+            type="text/javascript"></script><![endif] -->
+    <script type="text/javascript">!function (o, c) {
+        var n = c.documentElement, t = " w-mod-";
+        n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
+    }(window, document);</script>
+    <link href="https://daks2k3a4ib2z.cloudfront.net/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png" rel="apple-touch-icon">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130238769-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-130238769-2');
+    </script>
     <style>
         body {
-            background-color: #F0F0F0;
-            font-family: "Helvetica Neue", "Helvetica", arial, sans-serif;
+            font: 10px sans-serif;
         }
 
-        .my-vertical-center {
-            margin-top: auto;
-            margin-bottom: auto;
+        svg text {
+            fill: grey;
+            font-size: 16px;
+
         }
 
-        .prediction-result {
-            color: rgb(255, 162, 16);
+        svg .values text {
+            pointer-events: none;
+            stroke-width: 0.5px;
         }
 
-        #overlay {
-            position: fixed;
-            /*display: none;*/
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 2;
+        .groups:hover {
             cursor: pointer;
+            font-weight: bold;
         }
-
-        #overlay_text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            font-size: 40px;
-            color: white;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-        }
-
     </style>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
-
 <body>
+<nav class="navbar navbar-expand-md fixed-top navbar-dark" style="background-color: #23476b!important">
+    <a class="navbar-brand" href="#">What's Missing</a>
+    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-<div id="overlay">
-    <a id="overlay_text" href="http://35.185.86.112:8080/">This demo has been moved to http://35.185.86.112:8080/</a>
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#heat">Heat</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#chord">Chord</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#vision">Vision</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#team">Team</a>
+            </li>
+        </ul>
+        <div class="pull-right grey-text text-larger">Brown Datathon 2019</div>
+    </div>
+</nav>
+
+<div class="hp-row2" id="video-section" style="min-height: 50rem">
+    <div id="see-video">
+        <div class="subtitle">Brown Datathon 2019</div>
+        <h3 class="text-largest" style="color: #ffffff;">WHAT'S MISSING?</h3>
+    </div>
+    <div class="row" style="margin-top: 1%">
+        <h4 style="color: #ffffff;">Diseases Correlation Ignored by the Medical Research</h4>
+    </div>
 </div>
 
 
-<div class="container">
-    <div class="row" style="margin-top: 5%"></div>
-    <h1 class="text-center">CNN tells you what it is</h1>
+<h2 class="center-text" style="margin-top: 5%">Diseases Correlation</h2>
+<span class="center-text grey-text text-smaller" style="text-transform: none">relation found in clinical survey and covered by research</span>
+<div class="row" style="width:1600px;height:600px;margin-left:90px" id="heat">
+    <div id="myDiv1" style="width:600px;height:600px;"></div>
+    <div id="myDiv2" style="width:600px;height:600px;"></div>
+</div>
+
+<div id="chord" style="margin-top: 5%">
+    <h2 class="center-text">Diseases v.s. Diseases</h2>
+    <h5 class="center-text" style="color: #8b8b8b">correlations ignored in the research</h5>
+</div>
+<div class="row" id="circle1" >
+
+</div>
+
+<div>
+    <h2 class="center-text">Diseases v.s. Life Habits</h2>
+    <h5 class="center-text" style="color: #8b8b8b">correlations ignored in the research</h5>
+</div>
+<div class="row" id="circle2">
+
+</div>
+
+<div class="hp-row4" id='vision'>
     <div class="row">
-        <div class="col-lg-7" id="pad_container"></div>
-        <!--<div class="col-lg-1"></div>-->
-        <div class="col-lg-5 my-vertical-center">
-            <div class="row">
-                <h3>Feel free to draw something like...</h3>
-                <table class="table table-bordered">
-                    <tbody id="suggestion-table-body">
-                    </tbody>
-                </table>
-                <h6>or any choice from a total 350 classes...</h6>
+        <h1 class="experiences-h1 title-font text-largest" style="color: #fff; ">Vision</h1>
+    </div>
+    <div class="row text-left" style="margin-top: 10%">
+        <div class="col-md-1"></div>
+        <ul class="col-md-4">
+            <li class="white-text">
+                Growing in size and diversity beyond the current 450k-row BRFFS data
+            </li>
+            <br>
+            <li class="white-text">
+                Leveraging NLP to extract semantic-level correlation in Google News and PubMed
+            </li>
+        </ul>
+        <div class="col-md-1"></div>
+        <div class="col-md-1"></div>
+        <ul class="col-md-4">
+            <li class="white-text">This project provides more insights into potential research topics that has been
+                "overlooked"
+            </li>
+            <br>
+            <li class="white-text">
+                More powerful metrics for measuring discrepancy between reality and research
+            </li>
+            <br>
+        </ul>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 10%">
+    <div class="container" id="team">
+        <div class="row">
+            <div class="heading-title text-center col-md-12">
+                <h2 class="text">Our Team </h2>
+                <!-- <h4>&nbsp;</h4> -->
+                <h3 class="p-top-30 half-txt">
+                    <a href="https://github.com/hanshiyi">Shiyi Han</a>,
+                    <a href="https://github.com/SunnySiqi">Siqi Wang</a>,
+                    <a href="https://www.linkedin.com/in/azyoung/">Yang Zhang</a>,
+                    <a href="https://www.linkedin.com/in/ziyin-ma-592061131/">Ziyin Ma</a>
+                    <a href="https://github.com/blownhither">
+                        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                             style="max-height: 1.5rem"/>
+                    </a>
+                </h3>
             </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
-                <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">-->
-                <button type="button" class="btn btn-lg btn-outline-primary" id="submit-button">submit</button>
-                <!--</div>-->
-                <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">-->
-                <button type="button" class="btn btn-lg btn-outline-danger" id="reset-button">reset&nbsp;</button>
-                <!--</div>-->
+        </div>
+        <div style="margin: 0; padding: 1rem;">
+            <img src="images/team.png" class="img-responsive">
+        </div>
+    </div>
+</div>
+
+<div class="facebook">
+    <div class="footer-container fb-footer"><a href="#" class="w-inline-block"><img src="images/brown.png"
+                                                                                    alt=""
+                                                                                    height="70" width="60"></a>
+        <div class="fb-footer-wrapper">
+            <div class="footer-text">
+                <div>2019 Brown Datathon</div>
+                <a href="#" class="fb-footer-link">Privacy</a><a href="#" class="fb-footer-link">Legal</a>
             </div>
         </div>
     </div>
-    <div class="row">
-        <h2 class="text-center col-lg-12 col-md-12" id="result"></h2>
-    </div>
 </div>
-
-
-<script src="index.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+<script src="https://d1tdp7z6w94jbb.cloudfront.net/js/jquery-3.3.1.min.js" type="text/javascript"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+<script src="js/webflow.js" type="text/javascript"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script>
+<script>
+    Plotly.d3.json('https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json', function (figure) {
+        var data = [
+            {
+                z: [[0.0, 0.1787890902420903, 0.14941471322125455, 0.048848083776572904, 0.08321803620816695, 0.20727647731643606, 0.037414596877983354, 0.12280401457187005, 0.0635287873177645], [0.1787890902420903, 0.0, 0.13157592929484715, 0.05349018222101478, 0.047107564672184715, 0.13902357029543355, 0.04302720420286471, 0.0551117805918617, 0.07763193795289365], [0.14941471322125455, 0.13157592929484715, 0.0, 0.06283546979558355, 0.035463687353795285, 0.1259012921193426, 0.037063297144596496, 0.08104608097991649, 0.08558331582856063], [0.048848083776572904, 0.053490182221014794, 0.06283546979558355, 0.0, 0.0025300221012361825, 0.13848641036867002, 0.100623692556181, 0.024812453502264853, 0.08912558055900315], [0.08321803620816695, 0.047107564672184715, 0.03546368735379529, 0.002530022101236183, 0.0, 0.0739550426297438, 0.009279497776237142, 0.04756363758616193, 0.013847095614818658], [0.20727647731643606, 0.13902357029543358, 0.1259012921193426, 0.13848641036867002, 0.0739550426297438, 0.0, 0.105463978430365, 0.16326575738447882, 0.11078933065693508], [0.03741459687798336, 0.04302720420286471, 0.037063297144596496, 0.100623692556181, 0.009279497776237143, 0.105463978430365, 0.0, 0.020137828127258485, 0.06138695085526457], [0.12280401457187005, 0.055111780591861705, 0.08104608097991647, 0.024812453502264853, 0.04756363758616193, 0.16326575738447882, 0.020137828127258485, 0.0, 0.03698480878644211], [0.0635287873177645, 0.07763193795289365, 0.08558331582856063, 0.08912558055900315, 0.013847095614818658, 0.11078933065693508, 0.06138695085526457, 0.0369848087864421, 0.0]],
+                x:
+                    ["Blood Cholesterol", "Diabetes", "Cardiovascular Disease", "Sleep Disorder", "High Blood Pressure", "Arthritis", "Asthma", "Cancer", "Difficulty in Vision"],
+                y:
+                    ["Blood Cholesterol", "Diabetes", "Cardiovascular Disease", "Sleep Disorder", "High Blood Pressure", "Arthritis", "Asthma", "Cancer", "Difficulty in Vision"],
+                type: 'heatmap',
+                colorscale: 'YIOrRd'
+            }
+        ];
+        var layout1 = {
+            title: 'BRFFS<br>clinical survey',
+            autosize: true, xaxis: { automargin: true }, yaxis: { automargin: true },
+        };
+        Plotly.newPlot('myDiv1', data, layout1);
+    });
+    Plotly.d3.json('https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json', function (figure) {
+        var data2 = [
+            {
+                z:
+                    [[0.0, 0.003453476820141077, 0.00599652761593461, 0.0, 0.00025828820071183145, 0.0005431466270238161, 0.00012029713252559304, 0.0006569725810550153, 0.0007955996552482247], [0.003453476820141077, 0.0, 0.01874319277703762, 2.2303505829768255e-05, 0.00015765834541525692, 0.0008672940894030035, 0.0006014785030856729, 0.002004509326070547, 0.002826100680977106], [0.00599652761593461, 0.01874319277703762, 0.0, 1.9093382434220985e-05, 0.0001981795794563368, 0.003961279988288879, 0.0003965772339142859, 0.001433481345884502, 0.001166240661405027], [0.0, 2.2303505829768255e-05, 1.9093382434220985e-05, 0.0, 0.0, 1.036477078741882e-05, 0.0, 3.7212728329905076e-06, 9.499382576905191e-05], [0.00025828820071183145, 0.00015765834541525692, 0.0001981795794563368, 0.0, 0.0, 2.5928256945917383e-05, 1.2657266779569909e-05, 0.000181178271304816, 3.0538412829628214e-05], [0.0005431466270238161, 0.0008672940894030035, 0.003961279988288879, 1.036477078741882e-05, 2.5928256945917383e-05, 0.0, 0.00046544100041501224, 0.00025989607092924416, 0.005992067512124777], [0.00012029713252559304, 0.0006014785030856729, 0.0003965772339142859, 0.0, 1.2657266779569909e-05, 0.00046544100041501224, 0.0, 0.0001065453325281851, 0.0035565474536269903], [0.0006569725810550153, 0.002004509326070547, 0.001433481345884502, 3.7212728329905076e-06, 0.000181178271304816, 0.00025989607092924416, 0.0001065453325281851, 0.0, 0.0011920379474759102], [0.0007955996552482247, 0.002826100680977106, 0.001166240661405027, 9.499382576905191e-05, 3.0538412829628214e-05, 0.005992067512124777, 0.0035565474536269903, 0.0011920379474759102, 0.0]],
+                x:
+                    ["Blood Cholesterol", "Diabetes", "Cardiovascular Disease", "Sleep Disorder", "High Blood Pressure", "Arthritis", "Asthma", "Cancer", "Difficulty in Vision"],
 
+                y:
+                    ["Blood Cholesterol", "Diabetes", "Cardiovascular Disease", "Sleep Disorder", "High Blood Pressure", "Arthritis", "Asthma", "Cancer", "Difficulty in Vision"],
+                type: 'heatmap',
+                colorscale: 'YIOrRd'
+            }
+        ];
+        var layout2 = { title: 'PubMed<br>co-occurrence in research title', autosize: true, xaxis: { automargin: true }, yaxis: { automargin: true } };
+        Plotly.newPlot('myDiv2', data2, layout2);
+    });
+</script>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="http://vizjs.org/viz.v1.1.2.min.js"></script>
+<script>
+
+    var data = [['Blood Cholesterol', 'Blood Cholesterol', 0.0],
+        ['Blood Cholesterol', 'Diabetes', 0.109],
+        ['Blood Cholesterol', 'Cardiovascular Disease', 0],
+        ['Blood Cholesterol', 'Sleep Disorder', 0],
+        ['Blood Cholesterol', 'High Blood Pressure', 0.002],
+        ['Blood Cholesterol', 'Arthritis', 0],
+        ['Blood Cholesterol', 'Asthma', 0],
+        ['Blood Cholesterol', 'Cancer', 0.094],
+        ['Blood Cholesterol', 'Difficulty in Vision', 0.061],
+        ['Diabetes', 'Blood Cholesterol', 0.231],
+        ['Diabetes', 'Diabetes', 0.0],
+        ['Diabetes', 'Cardiovascular Disease', 0.129],
+        ['Diabetes', 'Sleep Disorder', 0.028],
+        ['Diabetes', 'High Blood Pressure', 0],
+        ['Diabetes', 'Arthritis', 0.167],
+        ['Diabetes', 'Asthma', 0.042],
+        ['Diabetes', 'Cancer', 0],
+        ['Diabetes', 'Difficulty in Vision', 0.102],
+        ['Cardiovascular Disease', 'Blood Cholesterol', 0.074],
+        ['Cardiovascular Disease', 'Diabetes', 0],
+        ['Cardiovascular Disease', 'Cardiovascular Disease', 0.0],
+        ['Cardiovascular Disease', 'Sleep Disorder', 0],
+        ['Cardiovascular Disease', 'High Blood Pressure', 0],
+        ['Cardiovascular Disease', 'Arthritis', 0.021],
+        ['Cardiovascular Disease', 'Asthma', 0],
+        ['Cardiovascular Disease', 'Cancer', 0.011],
+        ['Cardiovascular Disease', 'Difficulty in Vision', 0.114],
+        ['Sleep Disorder', 'Blood Cholesterol', 0.09],
+        ['Sleep Disorder', 'Diabetes', 0.097],
+        ['Sleep Disorder', 'Cardiovascular Disease', 0.116],
+        ['Sleep Disorder', 'Sleep Disorder', 0.0],
+        ['Sleep Disorder', 'High Blood Pressure', 0],
+        ['Sleep Disorder', 'Arthritis', 0.261],
+        ['Sleep Disorder', 'Asthma', 0.188],
+        ['Sleep Disorder', 'Cancer', 0],
+        ['Sleep Disorder', 'Difficulty in Vision', 0.168],
+        ['High Blood Pressure', 'Blood Cholesterol', 0.263],
+        ['High Blood Pressure', 'Diabetes', 0.079],
+        ['High Blood Pressure', 'Cardiovascular Disease', 0.11],
+        ['High Blood Pressure', 'Sleep Disorder', 0],
+        ['High Blood Pressure', 'High Blood Pressure', 0.0],
+        ['High Blood Pressure', 'Arthritis', 0.234],
+        ['High Blood Pressure', 'Asthma', 0.028],
+        ['High Blood Pressure', 'Cancer', 0],
+        ['High Blood Pressure', 'Difficulty in Vision', 0.042],
+        ['Arthritis', 'Blood Cholesterol', 0.026],
+        ['Arthritis', 'Diabetes', 0.023],
+        ['Arthritis', 'Cardiovascular Disease', 0],
+        ['Arthritis', 'Sleep Disorder', 0.008],
+        ['Arthritis', 'High Blood Pressure', 0.007],
+        ['Arthritis', 'Arthritis', 0.0],
+        ['Arthritis', 'Asthma', 0],
+        ['Arthritis', 'Cancer', 0.03],
+        ['Arthritis', 'Difficulty in Vision', 0.092],
+        ['Asthma', 'Blood Cholesterol', 0],
+        ['Asthma', 'Diabetes', 0.004],
+        ['Asthma', 'Cardiovascular Disease', 0],
+        ['Asthma', 'Sleep Disorder', 0.066],
+        ['Asthma', 'High Blood Pressure', 0],
+        ['Asthma', 'Arthritis', 0],
+        ['Asthma', 'Asthma', 0.0],
+        ['Asthma', 'Cancer', 0],
+        ['Asthma', 'Difficulty in Vision', 0.137],
+        ['Cancer', 'Blood Cholesterol', 0.221],
+        ['Cancer', 'Diabetes', 0],
+        ['Cancer', 'Cardiovascular Disease', 0.142],
+        ['Cancer', 'Sleep Disorder', 0],
+        ['Cancer', 'High Blood Pressure', 0],
+        ['Cancer', 'Arthritis', 0.294],
+        ['Cancer', 'Asthma', 0.035],
+        ['Cancer', 'Cancer', 0.0],
+        ['Cancer', 'Difficulty in Vision', 0.066],
+        ['Difficulty in Vision', 'Blood Cholesterol', 0.08],
+        ['Difficulty in Vision', 'Diabetes', 0.067],
+        ['Difficulty in Vision', 'Cardiovascular Disease', 0.128],
+        ['Difficulty in Vision', 'Sleep Disorder', 0],
+        ['Difficulty in Vision', 'High Blood Pressure', 0],
+        ['Difficulty in Vision', 'Arthritis', 0.145],
+        ['Difficulty in Vision', 'Asthma', 0.081],
+        ['Difficulty in Vision', 'Cancer', 0],
+        ['Difficulty in Vision', 'Difficulty in Vision', 0.0]]
+    ;
+
+    var colors = {
+        "Blood Cholesterol": "#da4480"
+        , "Diabetes": "#5ab449"
+        , "Cardiovascular Disease": "#7f5acd"
+        , "Sleep Disorder": "#aab740"
+        , "High Blood Pressure": "#ce58c0"
+        , "Arthritis": "#50a26e"
+        , "Asthma": "#d1434b"
+        , "Cancer": "#45c0bc"
+        , "Difficulty in Vision": "#ce5929"
+        ,
+    };
+    var ch_1 = viz.ch();
+    console.log(ch_1);
+    var ch = viz.ch().data(data)
+        .padding(.01)
+        .label(function (d) {
+            // console.log(d);
+            // return d['source'] + "(\d['']\)";
+            return `${d['source']} (${d['value'].toPrecision(3)})`
+        })
+        .innerRadius(270)
+        .outerRadius(290)
+        .duration(1000)
+        .chordOpacity(0.3)
+        .labelPadding(.05)
+        .fill(function (d) { return colors[d]; })
+    ;
+
+    var width = 1200, height = 800;
+
+    var svg = d3.select("#circle1").append("svg").attr("height", height).attr("width", width);
+
+    svg.append("g").attr("transform", "translate(740,330)").call(ch);
+    // svg.append("g").attr("transform", "translate(600,550)").call(ch);
+
+    // adjust height of frame in bl.ocks.org
+    d3.select(self.frameElement).style("height", height + "px").style("width", width + "px");
+</script>
+
+<script>
+
+    var data = [['Blood Cholesterol', 'Blood Cholesterol', 0.0],
+        ['Blood Cholesterol', 'Diabetes', 0.0],
+        ['Blood Cholesterol', 'Cardiovascular Disease', 0.0],
+        ['Blood Cholesterol', 'Sleep Disorder', 0.0],
+        ['Blood Cholesterol', 'High Blood Pressure', 0.0],
+        ['Blood Cholesterol', 'Arthritis', 0.0],
+        ['Blood Cholesterol', 'Asthma', 0.0],
+        ['Blood Cholesterol', 'Cancer', 0.0],
+        ['Blood Cholesterol', 'Difficulty in Vision', 0.0],
+        ['Blood Cholesterol', 'alcoholic', 0],
+        ['Blood Cholesterol', 'fruit', 0],
+        ['Blood Cholesterol', 'exercise', 0],
+        ['Blood Cholesterol', 'sweet', 0.217],
+        ['Blood Cholesterol', 'marijuana', 0.108],
+        ['Diabetes', 'Blood Cholesterol', 0.0],
+        ['Diabetes', 'Diabetes', 0.0],
+        ['Diabetes', 'Cardiovascular Disease', 0.0],
+        ['Diabetes', 'Sleep Disorder', 0.0],
+        ['Diabetes', 'High Blood Pressure', 0.0],
+        ['Diabetes', 'Arthritis', 0.0],
+        ['Diabetes', 'Asthma', 0.0],
+        ['Diabetes', 'Cancer', 0.0],
+        ['Diabetes', 'Difficulty in Vision', 0.0],
+        ['Diabetes', 'alcoholic', 0],
+        ['Diabetes', 'fruit', 0],
+        ['Diabetes', 'exercise', 0],
+        ['Diabetes', 'sweet', 0.184],
+        ['Diabetes', 'marijuana', 0.097],
+        ['Cardiovascular Disease', 'Blood Cholesterol', 0.0],
+        ['Cardiovascular Disease', 'Diabetes', 0.0],
+        ['Cardiovascular Disease', 'Cardiovascular Disease', 0.0],
+        ['Cardiovascular Disease', 'Sleep Disorder', 0.0],
+        ['Cardiovascular Disease', 'High Blood Pressure', 0.0],
+        ['Cardiovascular Disease', 'Arthritis', 0.0],
+        ['Cardiovascular Disease', 'Asthma', 0.0],
+        ['Cardiovascular Disease', 'Cancer', 0.0],
+        ['Cardiovascular Disease', 'Difficulty in Vision', 0.0],
+        ['Cardiovascular Disease', 'alcoholic', 0],
+        ['Cardiovascular Disease', 'fruit', 0.083],
+        ['Cardiovascular Disease', 'exercise', 0],
+        ['Cardiovascular Disease', 'sweet', 0.185],
+        ['Cardiovascular Disease', 'marijuana', 0],
+        ['Sleep Disorder', 'Blood Cholesterol', 0.0],
+        ['Sleep Disorder', 'Diabetes', 0.0],
+        ['Sleep Disorder', 'Cardiovascular Disease', 0.0],
+        ['Sleep Disorder', 'Sleep Disorder', 0.0],
+        ['Sleep Disorder', 'High Blood Pressure', 0.0],
+        ['Sleep Disorder', 'Arthritis', 0.0],
+        ['Sleep Disorder', 'Asthma', 0.0],
+        ['Sleep Disorder', 'Cancer', 0.0],
+        ['Sleep Disorder', 'Difficulty in Vision', 0.0],
+        ['Sleep Disorder', 'alcoholic', 0],
+        ['Sleep Disorder', 'fruit', 0.254],
+        ['Sleep Disorder', 'exercise', 0.286],
+        ['Sleep Disorder', 'sweet', 0],
+        ['Sleep Disorder', 'marijuana', 0.098],
+        ['High Blood Pressure', 'Blood Cholesterol', 0.0],
+        ['High Blood Pressure', 'Diabetes', 0.0],
+        ['High Blood Pressure', 'Cardiovascular Disease', 0.0],
+        ['High Blood Pressure', 'Sleep Disorder', 0.0],
+        ['High Blood Pressure', 'High Blood Pressure', 0.0],
+        ['High Blood Pressure', 'Arthritis', 0.0],
+        ['High Blood Pressure', 'Asthma', 0.0],
+        ['High Blood Pressure', 'Cancer', 0.0],
+        ['High Blood Pressure', 'Difficulty in Vision', 0.0],
+        ['High Blood Pressure', 'alcoholic', 0],
+        ['High Blood Pressure', 'fruit', 0.215],
+        ['High Blood Pressure', 'exercise', 0],
+        ['High Blood Pressure', 'sweet', 0.209],
+        ['High Blood Pressure', 'marijuana', 0.018],
+        ['Arthritis', 'Blood Cholesterol', 0.0],
+        ['Arthritis', 'Diabetes', 0.0],
+        ['Arthritis', 'Cardiovascular Disease', 0.0],
+        ['Arthritis', 'Sleep Disorder', 0.0],
+        ['Arthritis', 'High Blood Pressure', 0.0],
+        ['Arthritis', 'Arthritis', 0.0],
+        ['Arthritis', 'Asthma', 0.0],
+        ['Arthritis', 'Cancer', 0.0],
+        ['Arthritis', 'Difficulty in Vision', 0.0],
+        ['Arthritis', 'alcoholic', 0.05],
+        ['Arthritis', 'fruit', 0],
+        ['Arthritis', 'exercise', 0],
+        ['Arthritis', 'sweet', 0.181],
+        ['Arthritis', 'marijuana', 0],
+        ['Asthma', 'Blood Cholesterol', 0.0],
+        ['Asthma', 'Diabetes', 0.0],
+        ['Asthma', 'Cardiovascular Disease', 0.0],
+        ['Asthma', 'Sleep Disorder', 0.0],
+        ['Asthma', 'High Blood Pressure', 0.0],
+        ['Asthma', 'Arthritis', 0.0],
+        ['Asthma', 'Asthma', 0.0],
+        ['Asthma', 'Cancer', 0.0],
+        ['Asthma', 'Difficulty in Vision', 0.0],
+        ['Asthma', 'alcoholic', 0],
+        ['Asthma', 'fruit', 0.097],
+        ['Asthma', 'exercise', 0],
+        ['Asthma', 'sweet', 0.17],
+        ['Asthma', 'marijuana', 0.115],
+        ['Cancer', 'Blood Cholesterol', 0.0],
+        ['Cancer', 'Diabetes', 0.0],
+        ['Cancer', 'Cardiovascular Disease', 0.0],
+        ['Cancer', 'Sleep Disorder', 0.0],
+        ['Cancer', 'High Blood Pressure', 0.0],
+        ['Cancer', 'Arthritis', 0.0],
+        ['Cancer', 'Asthma', 0.0],
+        ['Cancer', 'Cancer', 0.0],
+        ['Cancer', 'Difficulty in Vision', 0.0],
+        ['Cancer', 'alcoholic', 0],
+        ['Cancer', 'fruit', 0.024],
+        ['Cancer', 'exercise', 0],
+        ['Cancer', 'sweet', 0.126],
+        ['Cancer', 'marijuana', 0.084],
+        ['Difficulty in Vision', 'Blood Cholesterol', 0.0],
+        ['Difficulty in Vision', 'Diabetes', 0.0],
+        ['Difficulty in Vision', 'Cardiovascular Disease', 0.0],
+        ['Difficulty in Vision', 'Sleep Disorder', 0.0],
+        ['Difficulty in Vision', 'High Blood Pressure', 0.0],
+        ['Difficulty in Vision', 'Arthritis', 0.0],
+        ['Difficulty in Vision', 'Asthma', 0.0],
+        ['Difficulty in Vision', 'Cancer', 0.0],
+        ['Difficulty in Vision', 'Difficulty in Vision', 0.0],
+        ['Difficulty in Vision', 'alcoholic', 0],
+        ['Difficulty in Vision', 'fruit', 0.109],
+        ['Difficulty in Vision', 'exercise', 0.138],
+        ['Difficulty in Vision', 'sweet', 0],
+        ['Difficulty in Vision', 'marijuana', 0],
+        ['alcoholic', 'Blood Cholesterol', 0.023],
+        ['alcoholic', 'Diabetes', 0.017],
+        ['alcoholic', 'Cardiovascular Disease', 0],
+        ['alcoholic', 'Sleep Disorder', 0],
+        ['alcoholic', 'High Blood Pressure', 0],
+        ['alcoholic', 'Arthritis', 0.197],
+        ['alcoholic', 'Asthma', 0.054],
+        ['alcoholic', 'Cancer', 0.224],
+        ['alcoholic', 'Difficulty in Vision', 0.099],
+        ['alcoholic', 'alcoholic', 0.0],
+        ['alcoholic', 'fruit', 0.0],
+        ['alcoholic', 'exercise', 0.0],
+        ['alcoholic', 'sweet', 0.0],
+        ['alcoholic', 'marijuana', 0.0],
+        ['fruit', 'Blood Cholesterol', 0],
+        ['fruit', 'Diabetes', 0],
+        ['fruit', 'Cardiovascular Disease', 0.039],
+        ['fruit', 'Sleep Disorder', 0.246],
+        ['fruit', 'High Blood Pressure', 0.21],
+        ['fruit', 'Arthritis', 0.059],
+        ['fruit', 'Asthma', 0.134],
+        ['fruit', 'Cancer', 0],
+        ['fruit', 'Difficulty in Vision', 0.141],
+        ['fruit', 'alcoholic', 0.0],
+        ['fruit', 'fruit', 0.0],
+        ['fruit', 'exercise', 0.0],
+        ['fruit', 'sweet', 0.0],
+        ['fruit', 'marijuana', 0.0],
+        ['exercise', 'Blood Cholesterol', 0],
+        ['exercise', 'Diabetes', 0.297],
+        ['exercise', 'Cardiovascular Disease', 0.297],
+        ['exercise', 'Sleep Disorder', 0.41],
+        ['exercise', 'High Blood Pressure', 0.241],
+        ['exercise', 'Arthritis', 0.367],
+        ['exercise', 'Asthma', 0.182],
+        ['exercise', 'Cancer', 0.013],
+        ['exercise', 'Difficulty in Vision', 0.446],
+        ['exercise', 'alcoholic', 0.0],
+        ['exercise', 'fruit', 0.0],
+        ['exercise', 'exercise', 0.0],
+        ['exercise', 'sweet', 0.0],
+        ['exercise', 'marijuana', 0.0],
+        ['sweet', 'Blood Cholesterol', 0.155],
+        ['sweet', 'Diabetes', -0.0],
+        ['sweet', 'Cardiovascular Disease', 0.212],
+        ['sweet', 'Sleep Disorder', 0],
+        ['sweet', 'High Blood Pressure', 0.242],
+        ['sweet', 'Arthritis', 0.237],
+        ['sweet', 'Asthma', 0.202],
+        ['sweet', 'Cancer', 0.264],
+        ['sweet', 'Difficulty in Vision', 0.002],
+        ['sweet', 'alcoholic', 0.0],
+        ['sweet', 'fruit', 0.0],
+        ['sweet', 'exercise', 0.0],
+        ['sweet', 'sweet', 0.0],
+        ['sweet', 'marijuana', 0.0],
+        ['marijuana', 'Blood Cholesterol', 0],
+        ['marijuana', 'Diabetes', 0.089],
+        ['marijuana', 'Cardiovascular Disease', 0],
+        ['marijuana', 'Sleep Disorder', 0.105],
+        ['marijuana', 'High Blood Pressure', 0.007],
+        ['marijuana', 'Arthritis', 0.066],
+        ['marijuana', 'Asthma', 0.159],
+        ['marijuana', 'Cancer', 0],
+        ['marijuana', 'Difficulty in Vision', 0],
+        ['marijuana', 'alcoholic', 0.0],
+        ['marijuana', 'fruit', 0.0],
+        ['marijuana', 'exercise', 0.0],
+        ['marijuana', 'sweet', 0.0],
+        ['marijuana', 'marijuana', 0.0]]
+
+    var colors = {
+        "Blood Cholesterol": "#da4480"
+        , "Diabetes": "#5ab449"
+        , "Cardiovascular Disease": "#7f5acd"
+        , "Sleep Disorder": "#aab740"
+        , "High Blood Pressure": "#ce58c0"
+        , "Arthritis": "#50a26e"
+        , "Asthma": "#d1434b"
+        , "Cancer": "#45c0bc"
+        , "Difficulty in Vision": "#ce5929"
+        , "alcoholic" :"#04FAE0"
+        , "fruit": "#040CFA"
+        , "exercise":"#EF04FA"
+        , "sweet" :"#FAEF04"
+        , "marijuana":"#FA041B"
+    };
+
+    var ch1 = viz.ch().data(data)
+        .padding(.01)
+        .label(function (d) {
+            // console.log(d); return d['source'];
+            return `${d['source']} (${d['value'].toPrecision(3)})`
+        })
+        .innerRadius(270)
+        .outerRadius(290)
+        .duration(1000)
+        .chordOpacity(0.3)
+        .labelPadding(.05)
+        .fill(function (d) { return colors[d]; })
+    ;
+
+    var width = 1200, height = 800;
+
+    var svg = d3.select("#circle2").append("svg").attr("height", height).attr("width", width);
+
+    svg.append("g").attr("transform", "translate(740,330)").call(ch1);
+
+    // adjust height of frame in bl.ocks.org
+    d3.select(self.frameElement).style("height", height + "px").style("width", width + "px");
+</script>
 </body>
-
 </html>
