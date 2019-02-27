@@ -172,13 +172,13 @@ function chord1(w, h) {
         })
     ;
 
-    // let width = w, height = Math.max(w * 0.8, 800);
+    let width = size * 1.1;
 
 
     let svg = d3.select("#circle1").append("svg").attr("height", size).
-        style("margin-left", "auto").style("margin-right", "auto").attr("width", size);
+        style("margin-left", "auto").style("margin-right", "auto").attr("width", width);
     // let lm = svg.attr("margin-left");
-    svg.append("g").attr("transform", `translate(${size/2},${size/2})`).call(ch);
+    svg.append("g").attr("transform", `translate(${width/2},${size/2})`).call(ch);
     // svg.append("g").attr("transform", `translate(${width/2},${height/2})`).call(ch);
     // svg.append("g").attr("transform", "translate(740,330)").call(ch);
     // svg.append("g").attr("transform", "translate(600,550)").call(ch);
@@ -422,11 +422,12 @@ function chord2(w, h) {
     ;
 
     // let width = 1200, height = 800;
+    let width = size * 1.1;
 
     let svg = d3.select("#circle2").append("svg").attr("height", size).
-        style("margin-left", "auto").style("margin-right", "auto").attr("width", size);
+        style("margin-left", "auto").style("margin-right", "auto").attr("width", width);
     // let lm = svg.attr("margin-left");
-    svg.append("g").attr("transform", `translate(${size/2},${size/2})`).call(ch1);
+    svg.append("g").attr("transform", `translate(${width/2},${size/2})`).call(ch1);
 
     // adjust height of frame in bl.ocks.org
     // d3.select(self.frameElement).style("height", height + "px").style("width", width + "px");
