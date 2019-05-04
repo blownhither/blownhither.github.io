@@ -53,11 +53,8 @@
             .join("");
     }
     let head = select_line();
-    let tail = select_line();
-    // console.log(head[head.length - 1]);
-
-    const total_length = 5000;
-
+    let tail = "========END";
+    const total_length = 4980;
     const len = total_length - head.length - tail.length;
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let charactersLength = characters.length;
@@ -65,9 +62,13 @@
     for(let i=0; i<len; ++i) {
         a[i] = characters.charAt(Math.random() * charactersLength);
     }
-    let s = a.join('');
+    let s = head + a.join('') + tail;
+    s = s.substr(0, 4080) + "====PageBoundary====" + s.substring(4080);
+    console.log(s.substr(4095, 10));
+
+
     let c = document.getElementById("container");
-    c.innerHTML = head + s + tail + `<br><br><br><br><br><br>Length: ${total_length}`;
+    c.innerHTML = s + `<br><br><br><br><br><br>Length: ${s.length}`;
 
 </script>
 
