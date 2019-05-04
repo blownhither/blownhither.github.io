@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random String for Puddlestore Grading</title>
+</head>
+<body>
+<p style="overflow-wrap: break-word" id="container"></p>
+</body>
+
+<script>
+    let lyrics = "Today is gonna be the day\n" +
+    "That they re gonna throw it back to you\n" +
+    "By now you should ve somehow\n" +
+    "Realized what you gotta do\n" +
+    "I don t believe that anybody\n" +
+    "Feels the way I do, about you now\n" +
+    "Backbeat, the word was on the street\n" +
+    "That the fire in your heart is out\n" +
+    "I m sure you ve heard it all before\n" +
+    "But you never really had a doubt\n" +
+    "I don t believe that anybody\n" +
+    "Feels the way I do about you now\n" +
+    "And all the roads we have to walk are winding\n" +
+    "And all the lights that lead us there are blinding\n" +
+    "There are many things that I\n" +
+    "Would like to say to you but I don t know how\n" +
+    "Because maybe, you re gonna be the one that saves me\n" +
+    "And after all, you re my wonderwall\n" +
+    "Today was gonna be the day\n" +
+    "But they ll never throw it back to you\n" +
+    "By now you should ve somehow\n" +
+    "Realized what you re not to do\n" +
+    "I don t believe that anybody\n" +
+    "Feels the way I do, about you now\n" +
+    "And all the roads that lead you there are winding\n" +
+    "And all the lights that light the way are blinding\n" +
+    "There are many things that I\n" +
+    "Would like to say to you but I don t know how\n" +
+    "I said maybe, you re gonna be the one that saves me\n" +
+    "And after all, you re my wonderwall\n" +
+    "I said maybe, you re gonna be the one that saves me\n" +
+    "And after all, you re my wonderwall\n" +
+    "I said maybe, you re gonna be the one that saves me\n" +
+    "you re gonna be the one that saves me\n" +
+    "you re gonna be the one that saves me";
+    lyrics = lyrics.split('\n');
+    let head = lyrics[Math.floor(Math.random() * lyrics.length)].split(" ").join(",");
+    let tail = lyrics[Math.floor(Math.random() * lyrics.length)].split(" ").join(",");
+    // console.log(head[head.length - 1]);
+
+    const total_length = 5000;
+
+    const len = total_length - head.length - tail.length;
+    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = characters.length;
+    let a = new Array(len);
+    for(let i=0; i<len; ++i) {
+        a[i] = characters.charAt(Math.random() * charactersLength);
+    }
+    let s = a.join('');
+    let c = document.getElementById("container");
+    c.innerHTML = head + s + tail + `<br><br><br><br><br><br>Length: ${total_length}`;
+
+</script>
+
+</html>
